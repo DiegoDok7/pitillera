@@ -1,6 +1,6 @@
 # Estuche impreso en 3D
 
-Landing de venta del estuche, hecha con Next.js. El contenido se renderiza en el servidor (SEO orgánico) y el estuche en 3D (Three.js) acompaña toda la página: se imprime al cargar, se abre, se separa en capas, se personaliza en tiempo real y cambia de pose y de lado en cada sección.
+Landing de venta del estuche, hecha con Next.js. El contenido se renderiza en el servidor (SEO orgánico) y el estuche en 3D (Three.js) acompaña toda la página: se imprime al cargar, se abre, se personaliza en tiempo real y cambia de pose y de lado en cada sección.
 
 ## Ejecutar en local
 
@@ -26,15 +26,14 @@ npm start
 | 1 | Hero: titular, Comprar / Personalizar, microconfianza | Se imprime y abre la tapa |
 | 2 | Problema → solución | Abierto, con el cajón fuera |
 | 3 | Anatomía (pendiente del modelo 3D real) | Abierto con etiquetas numeradas |
-| 4 | Materiales y fabricación | Separado en capas |
-| 5 | Especificaciones | Cerrado, girando a la izquierda |
-| 6 | Personalizador por pasos + carrito | Interactivo |
-| 7 | Galería | Pequeño sobre las fotos |
-| 8 | Opiniones (solo se muestra si hay valoraciones reales) | Girando |
-| 9 | Tiendas (B2B) con formulario | Con el cajón fuera |
-| 10 | FAQ (con datos estructurados FAQPage) | Abierto, a la izquierda |
-| 11 | CTA final | Girando en el centro |
-| 12 | Footer legal y páginas `/legal/*` | — |
+| 4 | Especificaciones | Cerrado, girando a la izquierda |
+| 5 | Personalizador por pasos + carrito | Interactivo |
+| 6 | Galería | Pequeño sobre las fotos |
+| 7 | Opiniones (solo se muestra si hay valoraciones reales) | Girando |
+| 8 | Tiendas (B2B) con formulario | Con el cajón fuera |
+| 9 | FAQ (con datos estructurados FAQPage) | Abierto, a la izquierda |
+| 10 | CTA final | Girando en el centro |
+| 11 | Footer legal y páginas `/legal/*` | — |
 
 Las poses están en `KF` dentro de `lib/scene.js` (una por `data-k` de cada sección). En móvil, en las secciones de texto largo el estuche queda atenuado detrás del contenido.
 
@@ -61,7 +60,7 @@ Cada pedido personalizado se guarda con un SKU (`EST-C-<cuerpo>-<tapa>-<patrón>
 
 ## Pendiente
 
-**Datos** (en `lib/site.js`): nombre comercial (`brand`; mientras falte se muestra «Estuche 3D»), precio base y suplemento del acabado texturizado, plazos de fabricación y envío, dimensiones, peso, capacidad, datos del fabricante, URL pública, catálogo PDF, vídeo de la impresora y valoraciones reales.
+**Datos** (en `lib/site.js`): nombre comercial (`brand`; mientras falte se muestra «Estuche 3D»), precio base y suplemento del acabado texturizado, plazos de fabricación y envío, dimensiones, peso, capacidad, datos del fabricante, URL pública, catálogo PDF y valoraciones reales.
 
 **Contenido**: textos legales, modelo 3D real para la sección de anatomía y fotos de producto en contexto para la galería.
 

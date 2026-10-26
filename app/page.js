@@ -146,25 +146,8 @@ export default function Page() {
           </div>
         </div></section>
 
-        <section className="ch" id="fabricacion" data-label="Fabricación" data-k="fabricacion"><div className="in">
-          <div className="copy">
-            <div className="eyebrow">04 · Materiales y fabricación</div>
-            <h2 className="reveal">Hecho capa a capa, <em>bajo pedido.</em></h2>
-            <ul className="facts fade">
-              <li><b>{s.material}</b>Resistente al calor: no se deforma en el coche.</li>
-              <li><b>{s.gasket}</b>Sella la tapa para mantener la humedad.</li>
-              <li><b>Impreso bajo pedido</b>Revisado a mano y sin stock sobrante.</li>
-            </ul>
-            {SITE.printerVideo ? (
-              <video className="printvid fade" src={SITE.printerVideo} autoPlay muted loop playsInline aria-label="La impresora fabricando un estuche" />
-            ) : (
-              <div className="printvid ph fade"><Todo>Vídeo de la impresora trabajando</Todo></div>
-            )}
-          </div>
-        </div></section>
-
         <section className="ch flow right" id="especificaciones" data-label="Medidas" data-k="especificaciones"><div className="in">
-          <div className="eyebrow fade">05 · Especificaciones</div>
+          <div className="eyebrow fade">04 · Especificaciones</div>
           <h2 className="reveal">Medidas <em>y capacidad.</em></h2>
           <div className="tablewrap fade">
             <table className="specs">
@@ -184,7 +167,7 @@ export default function Page() {
 
         <section className="ch" id="personaliza" data-label="Personaliza" data-k="personaliza"><div className="dragzone" aria-hidden="true" /><div className="in">
           <div className="copy custom">
-            <div className="eyebrow">06 · Personalizador</div>
+            <div className="eyebrow">05 · Personalizador</div>
             <h2 className="reveal">Hazla <em>tuya.</em></h2>
             <Configurator />
           </div>
@@ -198,7 +181,7 @@ export default function Page() {
 
         <section className="ch" id="real" data-label="Galería" data-k="galeria"><div className="pin">
           <div className="real-head">
-            <div className="real-title"><div className="eyebrow">07 · Galería</div><h2 className="reveal">La pieza <em>real.</em></h2></div>
+            <div className="real-title"><div className="eyebrow">06 · Galería</div><h2 className="reveal">La pieza <em>real.</em></h2></div>
             <p>Fotos del producto impreso, tal y como sale del taller.</p>
           </div>
           <div className="track" id="track">
@@ -212,7 +195,7 @@ export default function Page() {
 
         {SITE.reviews.length > 0 && (
           <section className="ch flow" id="opiniones" data-label="Opiniones" data-k="opiniones"><div className="in">
-            <div className="eyebrow fade">08 · Opiniones</div>
+            <div className="eyebrow fade">07 · Opiniones</div>
             <h2 className="reveal">Lo que dicen <em>quienes lo usan.</em></h2>
             <div className="reviews">
               {SITE.reviews.map((r) => (
@@ -233,7 +216,7 @@ export default function Page() {
 
         <section className="ch flow" id="tiendas" data-label="Tiendas" data-k="tiendas"><div className="in b2b">
           <div className="b2bcopy">
-            <div className="eyebrow fade">09 · Para tiendas</div>
+            <div className="eyebrow fade">08 · Para tiendas</div>
             <h2 className="reveal">¿Tienes una tienda <em>o estanco?</em></h2>
             <ul className="facts fade">
               <li><b>Tarifas por volumen</b>Precios escalonados según tu pedido mensual.</li>
@@ -250,7 +233,7 @@ export default function Page() {
         </div></section>
 
         <section className="ch flow right" id="faq" data-label="Preguntas" data-k="faq"><div className="in">
-          <div className="eyebrow fade">10 · Preguntas frecuentes</div>
+          <div className="eyebrow fade">09 · Preguntas frecuentes</div>
           <h2 className="reveal">Lo que <em>nos preguntáis.</em></h2>
           <div className="faq">
             {FAQ.map((f) => (
