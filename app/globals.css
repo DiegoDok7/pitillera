@@ -235,6 +235,8 @@ svg.leaders circle{fill:var(--lime)}
 .check input{margin-top:2px;width:18px;height:18px;accent-color:var(--lime)}
 .check span{flex:1}
 .check small{width:100%}
+.b2btoggle{display:none}
+.m-only{display:none}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 .formfoot{grid-column:1/-1;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
 .formerr{margin:0;color:#ff9a9a;font-size:14px}
@@ -285,10 +287,30 @@ svg.leaders circle{fill:var(--lime)}
   .sitefoot{grid-template-columns:1fr 1fr}
 }
 @media (max-width:760px){
+  /* trimmed mobile page: the case leads, text is reduced to the essentials */
+  .m-hide,.eyebrow,#ghost,.chapter,.tag,svg.leaders{display:none!important}
+  .m-only{display:block}
+  .ch.flow.m-stick{min-height:150vh}
+  .ch.flow:not(.m-stick)>.in{padding-top:48vh}
+  .flow h2{margin:0 0 16px}
+  .problems{display:flex;flex-direction:column;gap:8px}
+  .problem{flex-direction:row;align-items:center;gap:14px;padding:12px 14px;background:rgba(20,8,19,.85)}
+  .problem .ico svg{width:28px;height:28px}
+  .problem .bad,.problem p:last-child{display:none}
+  .problem h3{font-size:17px;letter-spacing:-.01em}
+  .specs{font-size:14px}
+  .specs th,.specs td{padding:10px 0}
+  .b2btoggle{display:inline-flex;align-self:flex-start}
+  .b2bform{display:none}
+  .b2bform.open{display:grid}
+  .ch.flow>.in.b2b{gap:16px}
+  .faq summary{padding:16px 36px 16px 0;font-size:16px}
+  .real-head{gap:0}
+  .mq.b{display:none}
   .ch>.in{align-items:flex-end;padding-block:0 6vh}
   .ch.flow>.in,.ch.flow.right>.in{padding-block:12vh 8vh;width:auto;margin:0}
   .copy,.hero-copy{width:100%;margin:0}
-  body::after{content:"";position:fixed;left:0;right:0;bottom:0;height:62vh;background:linear-gradient(transparent,rgba(15,7,15,.94) 42%);z-index:2;pointer-events:none}
+  body::after{content:"";position:fixed;left:0;right:0;bottom:0;height:46vh;background:linear-gradient(transparent,rgba(15,7,15,.92) 55%);z-index:2;pointer-events:none}
   h1{font-size:clamp(40px,11.5vw,62px)}
   h2{font-size:clamp(36px,10vw,56px)}
   .hero-copy{gap:14px}
@@ -315,6 +337,8 @@ svg.leaders circle{fill:var(--lime)}
   .specs th{width:38%}
   .sitefoot{grid-template-columns:1fr}
   .marquee{bottom:6vh}
+  .ch.flow.m-stick>.in{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:flex-end;align-items:stretch;padding-block:0 5vh;margin:0;width:auto}
+  .ch.flow.m-stick .faq{max-width:none;width:100%}
 }
 @media (prefers-reduced-motion:reduce){
   .split .w>span{transform:none;transition:none}.fade{opacity:1;transform:none;transition:none}

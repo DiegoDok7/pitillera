@@ -7,6 +7,8 @@ import Experience from '@/components/Experience';
 import { BODY_COLORS, ACCENT_COLORS, PATTERNS, FINISHES } from '@/lib/pitillera';
 import { FAQ, SITE, formatPrice } from '@/lib/site';
 
+// Mobile shows a trimmed page: elements marked m-hide are desktop-only, m-only are mobile-only,
+// and m-stick sections pin a short text block under the 3D case like the 3D chapters do.
 // Every section names its pose of the 3D case in `data-k` (keyframes in lib/scene.js); content sections leave the other half of the screen to it.
 
 const NAME = SITE.brand ?? SITE.product;
@@ -112,7 +114,7 @@ export default function Page() {
           <div className="copy hero-copy">
             <div className="eyebrow fade on">Diseñado e impreso a medida</div>
             <h1 className="reveal">Todo lo que llevas, <em>en un solo estuche.</em></h1>
-            <p className="lede fade on">Un compartimento para cada cosa, un cierre que conserva la humedad y formato de bolsillo. Impreso en 3D bajo pedido.</p>
+            <p className="lede fade on m-hide">Un compartimento para cada cosa, un cierre que conserva la humedad y formato de bolsillo. Impreso en 3D bajo pedido.</p>
             <div className="fade on"><BuyButtons /></div>
             <ul className="trust fade on">
               <li>Envío en {val(SITE.shippingDays, 'X')} días</li>
@@ -123,7 +125,7 @@ export default function Page() {
           </div>
         </div></section>
 
-        <section className="ch flow" id="problema" data-label="Para qué" data-k="problema"><div className="in">
+        <section className="ch flow m-stick" id="problema" data-label="Para qué" data-k="problema"><div className="in">
           <div className="eyebrow fade">02 · Por qué un estuche</div>
           <h2 className="reveal">Se acabó llevarlo <em>todo suelto.</em></h2>
           <div className="problems">
@@ -142,23 +144,23 @@ export default function Page() {
           <div className="copy">
             <div className="eyebrow">03 · Anatomía</div>
             <h2 className="reveal">Un sitio <em>para cada cosa.</em></h2>
-            <p className="lede fade">Abre la tapa y saca el cajón: dos compartimentos arriba y un cajón inferior que sale desde el frontal.</p>
+            <p className="lede fade m-hide">Abre la tapa y saca el cajón: dos compartimentos arriba y un cajón inferior que sale desde el frontal.</p>
           </div>
         </div></section>
 
-        <section className="ch flow right" id="especificaciones" data-label="Medidas" data-k="especificaciones"><div className="in">
+        <section className="ch flow right m-stick" id="especificaciones" data-label="Medidas" data-k="especificaciones"><div className="in">
           <div className="eyebrow fade">04 · Especificaciones</div>
           <h2 className="reveal">Medidas <em>y capacidad.</em></h2>
           <div className="tablewrap fade">
             <table className="specs">
               <tbody>
                 <tr><th scope="row">Dimensiones</th><td>{val(s.dimensions, 'L × A × H mm')}</td></tr>
-                <tr><th scope="row">Peso</th><td>{val(s.weight, 'GRAMOS')}</td></tr>
+                <tr className="m-hide"><th scope="row">Peso</th><td>{val(s.weight, 'GRAMOS')}</td></tr>
                 <tr><th scope="row">Capacidad</th><td>{val(s.capacityGrams, 'X')} g de tabaco · {val(s.papers, 'X')} papeles · {val(s.filters, 'X')} filtros</td></tr>
                 <tr><th scope="row">Material</th><td>{s.material} · {s.gasket} en el cierre</td></tr>
-                <tr><th scope="row">Colores</th><td>{BODY_COLORS.map((c) => c.name).join(', ')} · relieve en {ACCENT_COLORS.map((c) => c.name.toLowerCase()).join(', ')}</td></tr>
-                <tr><th scope="row">Texturas</th><td>{PATTERNS.map((p) => p.name).join(', ')}</td></tr>
-                <tr><th scope="row">Acabados</th><td>{FINISHES.map((f) => f.name).join(', ')}</td></tr>
+                <tr className="m-hide"><th scope="row">Colores</th><td>{BODY_COLORS.map((c) => c.name).join(', ')} · relieve en {ACCENT_COLORS.map((c) => c.name.toLowerCase()).join(', ')}</td></tr>
+                <tr className="m-hide"><th scope="row">Texturas</th><td>{PATTERNS.map((p) => p.name).join(', ')}</td></tr>
+                <tr className="m-hide"><th scope="row">Acabados</th><td>{FINISHES.map((f) => f.name).join(', ')}</td></tr>
                 <tr><th scope="row">Precio</th><td>{SITE.price.base == null ? <Todo>PRECIO</Todo> : `Desde ${formatPrice(SITE.price.base)}`}</td></tr>
               </tbody>
             </table>
@@ -182,7 +184,7 @@ export default function Page() {
         <section className="ch" id="real" data-label="Galería" data-k="galeria"><div className="pin">
           <div className="real-head">
             <div className="real-title"><div className="eyebrow">06 · Galería</div><h2 className="reveal">La pieza <em>real.</em></h2></div>
-            <p>Fotos del producto impreso, tal y como sale del taller.</p>
+            <p className="m-hide">Fotos del producto impreso, tal y como sale del taller.</p>
           </div>
           <div className="track" id="track">
             <figure className="card c1"><img src="/assets/top.webp" alt="Estuche visto desde arriba" loading="lazy" /><figcaption><span>Vista cenital</span><span>01</span></figcaption></figure>
@@ -218,21 +220,22 @@ export default function Page() {
           <div className="b2bcopy">
             <div className="eyebrow fade">08 · Para tiendas</div>
             <h2 className="reveal">¿Tienes una tienda <em>o estanco?</em></h2>
-            <ul className="facts fade">
+            <p className="lede m-only">Tarifas por volumen, expositor de mostrador y estuches con tu marca.</p>
+            <ul className="facts fade m-hide">
               <li><b>Tarifas por volumen</b>Precios escalonados según tu pedido mensual.</li>
               <li><b>Expositor de mostrador</b>Para tener los estuches a la vista en caja.</li>
               <li><b>Con la marca de tu tienda</b>Personalizamos los estuches con tu logo.</li>
             </ul>
             {SITE.catalogPdf ? (
-              <a className="btn ghost fade" href={SITE.catalogPdf} download>Descargar catálogo (PDF)</a>
+              <a className="btn ghost fade m-hide" href={SITE.catalogPdf} download>Descargar catálogo (PDF)</a>
             ) : (
-              <span className="btn ghost fade" aria-disabled="true">Catálogo PDF <Todo>pendiente</Todo></span>
+              <span className="btn ghost fade m-hide" aria-disabled="true">Catálogo PDF <Todo>pendiente</Todo></span>
             )}
           </div>
           <B2BForm />
         </div></section>
 
-        <section className="ch flow right" id="faq" data-label="Preguntas" data-k="faq"><div className="in">
+        <section className="ch flow right m-stick" id="faq" data-label="Preguntas" data-k="faq"><div className="in">
           <div className="eyebrow fade">09 · Preguntas frecuentes</div>
           <h2 className="reveal">Lo que <em>nos preguntáis.</em></h2>
           <div className="faq">

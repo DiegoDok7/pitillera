@@ -27,6 +27,7 @@ function YesNo({ name, label, errors, required }) {
 export default function B2BForm() {
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle'); // idle | sending | sent | error
+  const [open, setOpen] = useState(false); // mobile only: the form starts folded behind a button
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -63,7 +64,11 @@ export default function B2BForm() {
   const aria = (name) => ({ 'aria-invalid': !!errors[name], 'aria-describedby': errors[name] ? `${name}-err` : undefined });
 
   return (
-    <form className="b2bform" onSubmit={onSubmit} noValidate>
+    <>
+    <button type="button" className="btn b2btoggle" aria-expanded={open} aria-controls="b2bform" onClick={() => setOpen(!open)}>
+      {open ? 'Ocultar formulario' : 'Solicitar tarifas'}
+    </button>
+    <form className={'b2bform' + (open ? ' open' : '')} id="b2bform" onSubmit={onSubmit} noValidate>
       <Field name="business" label="Nombre del negocio" errors={errors}>
         <input name="business" autoComplete="organization" required {...aria('business')} />
       </Field>
@@ -116,5 +121,6 @@ export default function B2BForm() {
         {status === 'error' && <p className="formerr" role="alert">No hemos podido enviar la solicitud. Revisa los campos o inténtalo de nuevo.</p>}
       </div>
     </form>
+    </>
   );
 }
