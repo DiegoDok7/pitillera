@@ -27,21 +27,20 @@ const description = 'Estuche impreso en 3D con un compartimento para cada cosa, 
 
 export const metadata = {
   ...(SITE.siteUrl ? { metadataBase: new URL(SITE.siteUrl), alternates: { canonical: '/' } } : {}),
-  title: 'Estuche personalizable impreso en 3D · ARIST3D',
+  title: 'Estuche personalizable impreso en 3D',
   description,
-  icons: { icon: '/assets/logo.png' },
   openGraph: {
     type: 'website',
     locale: 'es_ES',
-    siteName: SITE.brand,
-    title: 'Todo lo que llevas, en un solo estuche · ARIST3D',
+    siteName: SITE.brand ?? SITE.product,
+    title: 'Todo lo que llevas, en un solo estuche',
     description,
-    images: [{ url: '/assets/top.webp', alt: 'Estuche ARIST3D visto desde arriba' }],
+    images: [{ url: '/assets/top.webp', alt: 'Estuche impreso en 3D visto desde arriba' }],
   },
 };
 
 // runs before paint: hides the age gate for visitors who already confirmed
-const AGE_SCRIPT = "try{if(/(?:^|; )arist3d_age=1/.test(document.cookie))document.documentElement.classList.add('age-ok')}catch(e){}";
+const AGE_SCRIPT = "try{if(/(?:^|; )mayor_edad=1/.test(document.cookie))document.documentElement.classList.add('age-ok')}catch(e){}";
 
 export const viewport = {
   width: 'device-width',

@@ -9,6 +9,8 @@ import { FAQ, SITE, formatPrice } from '@/lib/site';
 
 // Every section names its pose of the 3D case in `data-k` (keyframes in lib/scene.js); content sections leave the other half of the screen to it.
 
+const NAME = SITE.brand ?? SITE.product;
+
 const Todo = ({ children }) => <span className="todo">[{children}]</span>;
 const val = (v, label) => (v == null ? <Todo>{label}</Todo> : v);
 
@@ -54,7 +56,7 @@ function jsonLd() {
     name: SITE.product,
     description: 'Estuche impreso en 3D con un compartimento para cada cosa, cierre con junta que conserva la humedad y formato de bolsillo. Personalizable en color y textura.',
     image: ['/assets/top.webp', '/assets/open.webp', '/assets/front.webp'].map(abs),
-    brand: { '@type': 'Brand', name: SITE.brand },
+    ...(SITE.brand ? { brand: { '@type': 'Brand', name: SITE.brand } } : {}),
     material: SITE.specs.material,
     color: BODY_COLORS.map((c) => c.name).join(', '),
   };
@@ -89,13 +91,13 @@ export default function Page() {
     <div id="site">
       <AgeGate />
       <Experience />
-      <img id="fallback" src="/assets/top.webp" alt="Estuche ARIST3D" hidden />
-      <div className="ghost" id="ghost" aria-hidden="true">ARIST3D · ARIST3D · ARIST3D</div>
+      <img id="fallback" src="/assets/top.webp" alt="Estuche impreso en 3D" hidden />
+      <div className="ghost" id="ghost" aria-hidden="true">Impreso en 3D · Impreso en 3D</div>
       <div className="cursor" id="cursor" aria-hidden="true"><span>Arrastra</span></div>
       <svg className="leaders" id="leaders" aria-hidden="true" />
 
       <header>
-        <a className="brand" href="#hero"><img src="/assets/logo.png" alt="" /><span>ARIST<b>3</b>D</span></a>
+        <a className="brand" href="#hero">{NAME}</a>
         <div className="chapter" aria-hidden="true"><span className="num" id="chNum">00</span><span className="bar"><i id="chBar" /></span><span className="lbl" id="chLbl">Inicio</span></div>
         <nav className="nav" aria-label="Principal">
           <a href="#personaliza">Personalizar</a>
@@ -261,13 +263,13 @@ export default function Page() {
         </div></section>
 
         <section className="ch" id="cta" data-label="Tu estuche" data-k="cta"><div className="in">
-          <div className="eyebrow">ARIST3D · Diseñado e impreso a medida</div>
+          <div className="eyebrow">Diseñado e impreso a medida</div>
           <h2 className="reveal">Todo lo que llevas, <em>en un solo estuche.</em></h2>
           <BuyButtons />
           <div className="marquee" aria-hidden="true">
             {['a', 'b'].map((k) => (
               <div key={k} className={'mq ' + k} id={k === 'a' ? 'mqA' : 'mqB'}>
-                {Array.from({ length: 6 }, (_, i) => <span key={i}>ARIST3D — Impreso a medida — Hecho en {SITE.madeIn} — </span>)}
+                {Array.from({ length: 6 }, (_, i) => <span key={i}>Impreso a medida — Hecho en {SITE.madeIn} — </span>)}
               </div>
             ))}
           </div>
@@ -276,7 +278,7 @@ export default function Page() {
 
       <footer className="sitefoot">
         <div className="fcol">
-          <a className="brand" href="#hero"><img src="/assets/logo.png" alt="" /><span>ARIST<b>3</b>D</span></a>
+          <a className="brand" href="#hero">{NAME}</a>
           <p>Estuches diseñados e impresos en 3D bajo pedido en {SITE.madeIn}.</p>
         </div>
         <nav className="fcol" aria-label="Legal">
@@ -291,7 +293,7 @@ export default function Page() {
           <h3>Contacto</h3>
           <p>{val(m.email, 'EMAIL')}<br />{val(m.phone, 'TELÉFONO')}</p>
         </div>
-        <p className="copyright">© {new Date().getFullYear()} {SITE.brand}</p>
+        <p className="copyright">© {new Date().getFullYear()} {NAME}</p>
       </footer>
 
       {TAGS.map(([id, n, title, text]) => (

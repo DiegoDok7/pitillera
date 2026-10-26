@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-export const AGE_COOKIE = 'arist3d_age';
+export const AGE_COOKIE = 'mayor_edad';
 
 // The gate is always in the server HTML; an inline script in <head> adds `age-ok` to <html>
 // before paint when the cookie exists, so returning visitors never see it flash.
@@ -17,13 +17,12 @@ export default function AgeGate() {
   function accept() {
     document.cookie = `${AGE_COOKIE}=1; max-age=31536000; path=/; SameSite=Lax`;
     document.documentElement.classList.add('age-ok');
-    window.dispatchEvent(new Event('arist3d:age-ok'));
+    window.dispatchEvent(new Event('estuche:age-ok'));
   }
 
   return (
     <div className="agegate" role="dialog" aria-modal="true" aria-labelledby="ageTitle" aria-describedby="ageText">
       <div className="agebox">
-        <img src="/assets/logo.png" alt="" width="44" height="44" />
         {denied ? (
           <>
             <h2 id="ageTitle">Vuelve cuando cumplas 18.</h2>

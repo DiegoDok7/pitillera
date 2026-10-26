@@ -45,8 +45,6 @@ html:not(.age-ok){overflow:hidden}
 header{position:fixed;top:0;left:0;right:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:16px;
   padding-top:calc(18px + env(safe-area-inset-top,0px));padding-bottom:22px;padding-left:var(--gx);padding-right:var(--gxr);background:linear-gradient(rgba(15,7,15,.92),rgba(15,7,15,.6) 60%,rgba(15,7,15,0))}
 .brand{display:flex;align-items:center;gap:10px;font-family:var(--f-display);font-weight:800;font-size:20px;letter-spacing:.01em;color:var(--fg);text-decoration:none}
-.brand img{width:30px;height:30px}
-.brand b{color:var(--teal)}
 .chapter{display:flex;align-items:center;gap:14px;font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-left:auto}
 .chapter .num{color:var(--lime);font-variant-numeric:tabular-nums}
 .chapter .bar{width:100px;height:1px;background:var(--line);position:relative;overflow:hidden}

@@ -1,6 +1,6 @@
-# ARIST3D · Estuche impreso en 3D
+# Estuche impreso en 3D
 
-Landing de venta del estuche ARIST3D, hecha con Next.js. El contenido se renderiza en el servidor (SEO orgánico) y el estuche en 3D (Three.js) acompaña toda la página: se imprime al cargar, se abre, se separa en capas, se personaliza en tiempo real y cambia de pose y de lado en cada sección.
+Landing de venta del estuche, hecha con Next.js. El contenido se renderiza en el servidor (SEO orgánico) y el estuche en 3D (Three.js) acompaña toda la página: se imprime al cargar, se abre, se separa en capas, se personaliza en tiempo real y cambia de pose y de lado en cada sección.
 
 ## Ejecutar en local
 
@@ -22,7 +22,7 @@ npm start
 
 | # | Sección | Estuche 3D |
 |---|---|---|
-| 0 | Aviso de mayoría de edad (cookie `arist3d_age`, 1 año) | — |
+| 0 | Aviso de mayoría de edad (cookie `mayor_edad`, 1 año) | — |
 | 1 | Hero: titular, Comprar / Personalizar, microconfianza | Se imprime y abre la tapa |
 | 2 | Problema → solución | Abierto, con el cajón fuera |
 | 3 | Anatomía (pendiente del modelo 3D real) | Abierto con etiquetas numeradas |
@@ -51,17 +51,17 @@ Las poses están en `KF` dentro de `lib/scene.js` (una por `data-k` de cada secc
 | `lib/b2b.js` | Opciones y validación del formulario (incluye NIF/NIE/CIF) |
 | `lib/scene.js` | Escena Three.js, coreografía por scroll e interacción |
 | `lib/pitillera.js` | Modelo 3D procedural, catálogo de colores, texturas y acabados |
-| `public/model/ARIST3D_pitillera.glb` | Modelo 3D exportado (glTF binario, en metros) |
+| `public/model/pitillera.glb` | Modelo 3D exportado (glTF binario, en metros) |
 
 ## Personalización
 
-Colores, texturas (patrones de la tapa) y acabados están en `lib/pitillera.js` (`BODY_COLORS`, `LID_COLORS`, `ACCENT_COLORS`, `PATTERNS`, `FINISHES`). El personalizador genera los botones a partir de esas listas. Para añadir un patrón, crea su función de dibujo en `DRAW` (mismo `id`) y añádelo a `PATTERNS`.
+El estuche base es ciruela con relieve amarillo y patrón leopardo, acabado mate (`DEFAULT_LOOK`). Colores, texturas (patrones de la tapa) y acabados están en `lib/pitillera.js` (`BODY_COLORS`, `LID_COLORS`, `ACCENT_COLORS`, `PATTERNS`, `FINISHES`). El personalizador genera los botones a partir de esas listas. Para añadir un patrón, crea su función de dibujo en `DRAW` (mismo `id`) y añádelo a `PATTERNS`.
 
-Cada pedido personalizado se guarda con un SKU (`A3D-C-<cuerpo>-<tapa>-<patrón>-<relieve>-<acabado>`) y sus atributos en JSON (`attrs`), listos para producción.
+Cada pedido personalizado se guarda con un SKU (`EST-C-<cuerpo>-<tapa>-<patrón>-<relieve>-<acabado>`) y sus atributos en JSON (`attrs`), listos para producción.
 
 ## Pendiente
 
-**Datos** (en `lib/site.js`): precio base y suplemento del acabado texturizado, plazos de fabricación y envío, dimensiones, peso, capacidad, datos del fabricante, URL pública, catálogo PDF, vídeo de la impresora y valoraciones reales.
+**Datos** (en `lib/site.js`): nombre comercial (`brand`; mientras falte se muestra «Estuche 3D»), precio base y suplemento del acabado texturizado, plazos de fabricación y envío, dimensiones, peso, capacidad, datos del fabricante, URL pública, catálogo PDF, vídeo de la impresora y valoraciones reales.
 
 **Contenido**: textos legales, modelo 3D real para la sección de anatomía y fotos de producto en contexto para la galería.
 

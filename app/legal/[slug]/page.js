@@ -8,7 +8,7 @@ const LEGAL = {
   cookies: {
     title: 'Política de cookies',
     points: [
-      'arist3d_age: cookie técnica que recuerda que has confirmado ser mayor de edad (1 año).',
+      'mayor_edad: cookie técnica que recuerda que has confirmado ser mayor de edad (1 año).',
       'Almacenamiento local del navegador: guarda tu configuración del personalizador y tu carrito. No sale de tu dispositivo.',
     ],
   },
@@ -23,13 +23,15 @@ const LEGAL = {
   },
 };
 
+const NAME = SITE.brand ?? SITE.product;
+
 export function generateStaticParams() {
   return Object.keys(LEGAL).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  return { title: LEGAL[slug] ? `${LEGAL[slug].title} · ${SITE.brand}` : SITE.brand };
+  return { title: LEGAL[slug] ? `${LEGAL[slug].title} · ${NAME}` : NAME };
 }
 
 const v = (x, label) => x ?? <span className="todo">[{label}]</span>;
@@ -41,7 +43,7 @@ export default async function LegalPage({ params }) {
   const m = SITE.manufacturer;
   return (
     <main className="legal">
-      <a className="back" href="/">← Volver a {SITE.brand}</a>
+      <a className="back" href="/">← Volver a la tienda</a>
       <h1>{page.title}</h1>
       <p className="todo-block">[Texto pendiente de redacción y revisión legal]</p>
       {page.points && <ul>{page.points.map((p) => <li key={p}>{p}</li>)}</ul>}
