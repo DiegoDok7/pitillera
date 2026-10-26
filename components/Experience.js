@@ -1,21 +1,18 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
+// Starts the WebGL stage and scroll choreography on top of the server-rendered page.
 export default function Experience() {
-  const rootRef = useRef(null);
-
   useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return undefined;
-
     let disposed = false;
     let cleanup = () => {};
 
     import('@/lib/scene').then(({ startExperience }) => {
-      if (disposed || !rootRef.current) return;
+      const root = document.getElementById('site');
+      if (disposed || !root) return;
       try {
-        cleanup = startExperience(rootRef.current);
+        cleanup = startExperience(root);
       } catch (error) {
         console.error(error);
       }
@@ -27,5 +24,5 @@ export default function Experience() {
     };
   }, []);
 
-  return <div ref={rootRef} id="experience" />;
+  return null;
 }

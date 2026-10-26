@@ -1,6 +1,6 @@
-# ARIST3D · Pitillera
+# ARIST3D · Estuche impreso en 3D
 
-Landing 3D interactiva de la pitillera ARIST3D, hecha con Next.js: la pieza se imprime al cargar, se separa en capas, se abre (tapa y cajón inferior), se despieza, se puede girar con el ratón o el dedo y se personaliza (color del cuerpo, color del relieve y patrón de la tapa).
+Landing de venta del estuche ARIST3D, hecha con Next.js. El contenido se renderiza en el servidor (SEO orgánico) y el estuche en 3D (Three.js) acompaña toda la página: se imprime al cargar, se abre, se separa en capas, se personaliza en tiempo real y cambia de pose y de lado en cada sección.
 
 ## Ejecutar en local
 
@@ -18,21 +18,56 @@ npm run build
 npm start
 ```
 
-## Estructura
+## Estructura de la página
+
+| # | Sección | Estuche 3D |
+|---|---|---|
+| 0 | Aviso de mayoría de edad (cookie `arist3d_age`, 1 año) | — |
+| 1 | Hero: titular, Comprar / Personalizar, microconfianza | Se imprime y abre la tapa |
+| 2 | Problema → solución | Abierto, con el cajón fuera |
+| 3 | Anatomía (pendiente del modelo 3D real) | Abierto con etiquetas numeradas |
+| 4 | Materiales y fabricación | Separado en capas |
+| 5 | Especificaciones | Cerrado, girando a la izquierda |
+| 6 | Personalizador por pasos + carrito | Interactivo |
+| 7 | Galería | Pequeño sobre las fotos |
+| 8 | Opiniones (solo se muestra si hay valoraciones reales) | Girando |
+| 9 | Tiendas (B2B) con formulario | Con el cajón fuera |
+| 10 | FAQ (con datos estructurados FAQPage) | Abierto, a la izquierda |
+| 11 | CTA final | Girando en el centro |
+| 12 | Footer legal y páginas `/legal/*` | — |
+
+Las poses están en `KF` dentro de `lib/scene.js` (una por `data-k` de cada sección). En móvil, en las secciones de texto largo el estuche queda atenuado detrás del contenido.
+
+## Archivos
 
 | Ruta | Contenido |
 |---|---|
-| `app/page.js` | Página de la landing |
-| `app/globals.css` | Estilos |
-| `components/Experience.js` | Monta la experiencia en el cliente |
-| `lib/scene.js` | Escena Three.js, postprocesado, coreografía por scroll e interacción |
-| `lib/pitillera.js` | Modelo 3D procedural de la pitillera (cuerpo, tapa con cierre, dos compartimentos y cajón inferior) |
-| `public/assets/` | Logo y fotos del producto |
-| `public/model/ARIST3D_pitillera.glb` | Modelo 3D exportado desde `lib/pitillera.js` (glTF binario, en metros; nodos `bisagra` y `cajon` animables) |
+| `lib/site.js` | **Datos del producto y de la tienda**: precios, plazos, medidas, fabricante, FAQ. Lo que está a `null` aparece en la web como marcador `[ … ]` |
+| `app/page.js` | Página (server component) y datos estructurados Product + FAQPage |
+| `app/legal/[slug]/page.js` | Aviso legal, privacidad, cookies, condiciones, envíos y devoluciones |
+| `app/api/b2b/route.js` | Recepción del formulario B2B |
+| `components/` | Aviso de edad, carrito, personalizador, botones de compra, formulario B2B, arranque del 3D |
+| `lib/cart.js` | Carrito local, SKU y atributos del pedido personalizado |
+| `lib/b2b.js` | Opciones y validación del formulario (incluye NIF/NIE/CIF) |
+| `lib/scene.js` | Escena Three.js, coreografía por scroll e interacción |
+| `lib/pitillera.js` | Modelo 3D procedural, catálogo de colores, texturas y acabados |
+| `public/model/ARIST3D_pitillera.glb` | Modelo 3D exportado (glTF binario, en metros) |
 
 ## Personalización
 
-Los colores y patrones están en `lib/pitillera.js` (`BODY_COLORS`, `ACCENT_COLORS`, `PATTERNS`); la sección «Personaliza» genera los botones a partir de esas listas. Para añadir un patrón, crea su función de dibujo en `DRAW` (mismo `id`) y añádelo a `PATTERNS`. La elección se guarda en el navegador (`localStorage`).
+Colores, texturas (patrones de la tapa) y acabados están en `lib/pitillera.js` (`BODY_COLORS`, `LID_COLORS`, `ACCENT_COLORS`, `PATTERNS`, `FINISHES`). El personalizador genera los botones a partir de esas listas. Para añadir un patrón, crea su función de dibujo en `DRAW` (mismo `id`) y añádelo a `PATTERNS`.
+
+Cada pedido personalizado se guarda con un SKU (`A3D-C-<cuerpo>-<tapa>-<patrón>-<relieve>-<acabado>`) y sus atributos en JSON (`attrs`), listos para producción.
+
+## Pendiente
+
+**Datos** (en `lib/site.js`): precio base y suplemento del acabado texturizado, plazos de fabricación y envío, dimensiones, peso, capacidad, datos del fabricante, URL pública, catálogo PDF, vídeo de la impresora y valoraciones reales.
+
+**Contenido**: textos legales, modelo 3D real para la sección de anatomía y fotos de producto en contexto para la galería.
+
+**Fase 2**:
+- Pago con Stripe u otra pasarela (revisar su lista de actividades restringidas). El botón del carrito está desactivado hasta entonces.
+- Formulario B2B: aviso inmediato a ventas, email automático con el catálogo y alta en el CRM. Por ahora la ruta valida y guarda cada solicitud en `data/leads.ndjson` (excluido de git porque contiene datos personales). En un hosting sin disco persistente (p. ej. Vercel) esto hay que sustituirlo por un servicio externo.
 
 ## Dependencias
 
@@ -40,8 +75,3 @@ Los colores y patrones están en `lib/pitillera.js` (`BODY_COLORS`, `ACCENT_COLO
 - [Three.js 0.160.0](https://threejs.org)
 - [Lenis 1.3.26](https://github.com/darkroomengineering/lenis) para el scroll suave
 - Google Fonts vía `next/font`: Bricolage Grotesque, Familjen Grotesk, IBM Plex Mono
-
-## Pendiente
-
-- Añadir enlace de compra o contacto en la sección final.
-- Sustituir el modelo procedural por el STL/3MF real de la pieza si se quiere exactitud de proporciones y estampado.
